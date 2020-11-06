@@ -27,15 +27,15 @@ F = open(r'Results\Results_CASE-4 NACA Series.txt',"w")
 F.write("// File Written on " + str(dt.datetime.now()) + "\n")
 
 AF4 = AirfoilModel(MODEL_SHAPE)
-AF4.model_train_eval(D4, RUNS=1, BATCHSIZE=128, EPOCHS=1)
+AF4.model_train_eval(D4, RUNS=5, BATCHSIZE=128, EPOCHS=50)
 AF4.save_model(r'Models/')
 
 AF55r = AirfoilModel(MODEL_SHAPE)
-AF55r.model_train_eval(D55r, RUNS=1, BATCHSIZE=128, EPOCHS=1)
+AF55r.model_train_eval(D55r, RUNS=5, BATCHSIZE=128, EPOCHS=50)
 AF55r.save_model(r'Models/')
     
 AFU = AirfoilModel(MODEL_SHAPE)
-AFU.model_train_eval(DU, RUNS=1, BATCHSIZE=128, EPOCHS=1)
+AFU.model_train_eval(DU, RUNS=5, BATCHSIZE=128, EPOCHS=50)
 AFU.save_model(r'Models/')
 
 RMSE_a, R2_a = AF4.evaluate_model(D55r)

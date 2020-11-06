@@ -29,7 +29,7 @@ F.write("// File Written on " + str(dt.datetime.now()) + "\n")
 
 for ind, DS in enumerate(DATA):
     AF = AirfoilModel(MODEL_SHAPE)
-    AF.model_train_eval(DS, RUNS=1, BATCHSIZE=128, EPOCHS=1)
+    AF.model_train_eval(DS, RUNS=5, BATCHSIZE=128, EPOCHS=50)
     AF.save_model(r'Models/')
     
     F.write(DS.Label + ':\t\t' + myPrint(AF.best_RMSE,AF.best_R2) + '\n')
