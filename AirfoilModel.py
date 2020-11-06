@@ -120,6 +120,14 @@ class AirfoilModel():
                       metrics=['acc','mse', r2score])
         return model        
     
+    def evaluate_model(self, DS):
+        _TestX = self.Dataset.scaler.transform(DS.Data.loc[:, 'yU_1':'alpha'])
+        _TestY = DS.Data.loc[:, 'Cl':'Cm']
+        ypred  = self.best_model.predict(_TestX)
+        _R2    = R2(_TestY,ypred)
+        _RMSE  = RMSE(_TestY,ypred)
+        return _RMSE, _R2
+    
     def plot(self,key,label='label'):
         plt.plot(self.best_hist[key],'k',linewidth=2)
         plt.plot(self.best_hist['val_' + key],'b',linewidth=2)
@@ -138,9 +146,21 @@ class DATASET():
         assert sum(TVT_ratio) == 1
         self.Label = DataLabel
         self._zip_path = zippath
-        self._file_name = filename
         zf = ZipFile(zippath) 
-        self.Data = pd.read_csv(zf.open(filename))
+        if(type(filename)==str):
+            self._file_name = filename
+            self.Data = pd.read_csv(zf.open(filename))
+        elif(type(filename)==tuple):
+            self._file_name = []
+            temp = []
+            for n,file in enumerate(filename):
+                self._file_name.append(file)
+                _df = pd.read_csv(zf.open(file), index_col=None, header=0)
+                temp.append(_df)
+            
+            df = pd.concat(temp, axis=0, ignore_index=True)
+            self.Data = df.dropna().reset_index().drop(columns=['index'])
+            
         train, temp = train_test_split(self.Data, test_size=TVT_ratio[1]+TVT_ratio[2], random_state=RANDOM_SEED[0], shuffle=True)
         _ratio = TVT_ratio[2]/(TVT_ratio[1]+TVT_ratio[2]) 
         val, test   = train_test_split(temp, test_size=_ratio, random_state=RANDOM_SEED[1], shuffle=True)
