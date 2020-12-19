@@ -15,7 +15,7 @@ If you use this work for your projects, please take the time to cite our paper:
   journal  = {},
   title = {Airfoil's Aerodynamic Coefficients Prediction using Artificial Neural Network},
   year = {2020},
-  doi      = {10.1109/72.80202}
+  doi      = {}
   }
   ```
 
