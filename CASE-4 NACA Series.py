@@ -9,12 +9,15 @@ def myPrint(A,B):
 
 
 # Create Dataset
-D4 = DATASET('D4_10', 'Datasets.zip', 'NACA4Digit_Dataset10Point.csv',
+D4 = DATASET('D4_10', 'NACA4Digit_Dataset10Point.csv',
+             zipfolder='Datasets.zip',
+             TVT_ratio = [0.7,0.15,0.15], RANDOM_SEED = [42,30])
+D55r = DATASET('D5&5r_10', ('NACA5Digit_Dataset10Point.csv','NACA5rDigit_Dataset10Point.csv'),
+               zipfolder='Datasets.zip',
                TVT_ratio = [0.7,0.15,0.15], RANDOM_SEED = [42,30])
-D55r = DATASET('D5&5r_10', 'Datasets.zip', ('NACA5Digit_Dataset10Point.csv','NACA5rDigit_Dataset10Point.csv'),
-               TVT_ratio = [0.7,0.15,0.15], RANDOM_SEED = [42,30])
-DU = DATASET('D_all_10', 'Datasets.zip', ('NACA4Digit_Dataset10Point.csv','NACA5Digit_Dataset10Point.csv','NACA5rDigit_Dataset10Point.csv'),
-               TVT_ratio = [0.7,0.15,0.15], RANDOM_SEED = [42,30])
+DU = DATASET('D_all_10', ('NACA4Digit_Dataset10Point.csv','NACA5Digit_Dataset10Point.csv','NACA5rDigit_Dataset10Point.csv'),
+             zipfolder='Datasets.zip', 
+             TVT_ratio = [0.7,0.15,0.15], RANDOM_SEED = [42,30])
 
 D4.SaveScaler(r'Models/')
 D55r.SaveScaler(r'Models/')

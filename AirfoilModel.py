@@ -15,8 +15,8 @@ plt.style.use('seaborn-whitegrid')
 
 
 def RMSE(y_true, y_pred):
-    temp = K.sqrt(K.mean(K.square(y_true - y_pred),axis=0))
-    return temp.numpy()
+    temp = np.sqrt(np.mean(np.square(y_true.to_numpy() - y_pred),axis=0))
+    return temp
 
 def R2(y_true, y_pred):
     return r2_score(y_true, y_pred, multioutput='raw_values')
@@ -49,7 +49,7 @@ class AirfoilModel():
             reduce_lr_loss = ReduceLROnPlateau(monitor='val_loss', factor=0.1, patience=3, verbose=1, epsilon=1e-4, mode='min')
             model.summary()
             history = model.fit(TrainX, TrainY, validation_data=(ValX,ValY),
-                            epochs=EPOCHS, batch_size=BATCHSIZE, verbose=2,
+                            epochs=EPOCHS, batch_size=BATCHSIZE,
                             callbacks=[earlyStopping, reduce_lr_loss])
      
             trRes   = model.evaluate(TrainX, TrainY, batch_size=BATCHSIZE)
@@ -58,7 +58,7 @@ class AirfoilModel():
             ypred   = model.predict(TestX)
             testR2  = R2(TestY,ypred);
             test_rmse = RMSE(TestY,ypred);
-            new_loss = valRes[0];
+            new_loss = testRes[0];
             tvtloss = [trRes[0],valRes[0],testRes[0]];
             tvtR2   = [trRes[3],valRes[3],testRes[3]];
             
@@ -142,20 +142,30 @@ class AirfoilModel():
 
 #%% Class to load and scale datasets 
 class DATASET():
-    def __init__(self, DataLabel,zippath,filename,TVT_ratio = [0.7,0.15,0.15], RANDOM_SEED = [42,30]):
+    def __init__(self, DataLabel, filename, zipfolder = '', TVT_ratio = [0.7,0.15,0.15], RANDOM_SEED = [42,30]):
         assert sum(TVT_ratio) == 1
         self.Label = DataLabel
-        self._zip_path = zippath
-        zf = ZipFile(zippath) 
+        self._zip_path = zipfolder
+        if(zipfolder != ''):
+            zf = ZipFile(zipfolder) 
+            
         if(type(filename)==str):
             self._file_name = filename
-            self.Data = pd.read_csv(zf.open(filename))
+            if(zipfolder == ''):
+                self.Data = pd.read_csv(filename)
+            else:
+                self.Data = pd.read_csv(zf.open(filename))
+                
         elif(type(filename)==tuple):
             self._file_name = []
             temp = []
             for n,file in enumerate(filename):
                 self._file_name.append(file)
-                _df = pd.read_csv(zf.open(file), index_col=None, header=0)
+                if(zipfolder == ''):
+                    _df = pd.read_csv(file, index_col=None, header=0)
+                else:
+                    _df = pd.read_csv(zf.open(file), index_col=None, header=0)
+                    
                 temp.append(_df)
             
             df = pd.concat(temp, axis=0, ignore_index=True)

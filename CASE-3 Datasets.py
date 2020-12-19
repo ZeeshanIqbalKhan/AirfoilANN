@@ -9,11 +9,11 @@ def myPrint(A,B):
 
 
 # Create Dataset
-D405 = DATASET('D4_05', 'Datasets.zip', 'NACA4Digit_Dataset05Point.csv',
+D405 = DATASET('D4_05', 'NACA4Digit_Dataset05Point.csv', zipfolder='Datasets.zip',
                TVT_ratio = [0.7,0.15,0.15], RANDOM_SEED = [42,30])
-D410 = DATASET('D4_10', 'Datasets.zip', 'NACA4Digit_Dataset10Point.csv',
+D410 = DATASET('D4_10', 'NACA4Digit_Dataset10Point.csv', zipfolder='Datasets.zip',
                TVT_ratio = [0.7,0.15,0.15], RANDOM_SEED = [42,30])
-D415 = DATASET('D4_15', 'Datasets.zip', 'NACA4Digit_Dataset15Point.csv',
+D415 = DATASET('D4_15', 'NACA4Digit_Dataset15Point.csv', zipfolder='Datasets.zip',
                TVT_ratio = [0.7,0.15,0.15], RANDOM_SEED = [42,30])
 
 D405.SaveScaler(r'Models/')
