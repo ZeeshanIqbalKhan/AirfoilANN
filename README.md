@@ -1,7 +1,9 @@
 # AirfoilANN
-Official repository of paper, entitled ***"Airfoil’s Aerodynamic Coefficients Prediction using Artificial Neural Network"***.
+Official repository of paper, entitled [***"Airfoil’s Aerodynamic Coefficients Prediction using Artificial Neural Network"***](https://ieeexplore.ieee.org/document/9990112).
 
-[https://arxiv.org/abs/2109.12149](https://arxiv.org/abs/2109.12149)
+Presented at 19th International Bhurban Conference on Applied Sciences and Technology (IBCAST), 2022.
+
+***Preprint***: [https://arxiv.org/abs/2109.12149](https://arxiv.org/abs/2109.12149)
 
 [![DOI](https://zenodo.org/badge/310388639.svg)](https://zenodo.org/badge/latestdoi/310388639)
 
@@ -12,13 +14,13 @@ Figuring out the right airfoil is a crucial step in the preliminary stage of any
 If you use this work for your projects, please take the time to cite our paper:
 
   ```
-  @misc{moin2021airfoils,
-      title={Airfoil's Aerodynamic Coefficients Prediction using Artificial Neural Network}, 
-      author={Hassan Moin and Hafiz Zeeshan Iqbal Khan and Surrayya Mobeen and Jamshed Riaz},
-      year={2021},
-      eprint={2109.12149},
-      archivePrefix={arXiv},
-      primaryClass={physics.flu-dyn}
+  @InProceedings{moin2022,
+    author={Moin, Hassan and Khan, Hafiz Zeeshan Iqbal and Mobeen, Surrayya and Riaz, Jamshed},
+    booktitle={19th International Bhurban Conference on Applied Sciences and Technology (IBCAST)},
+    title={Airfoil's Aerodynamic Coefficients Prediction using Artificial Neural Network},
+    year={2022},
+    pages={175-182},
+    doi={10.1109/IBCAST54850.2022.9990112}
   }
   ```
 
