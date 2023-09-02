@@ -100,7 +100,7 @@ class AirfoilModel():
 
     def _create_model(self, inputShape):
 
-        ADAM = optimizers.Adam(lr=0.0005, beta_1=0.9, beta_2=0.999, epsilon=1e-08, decay=0.0)
+        ADAM = optimizers.Adam(lr=0.0005, beta_1=0.9, beta_2=0.999, epsilon=1e-08)
         LAYERS = [];
         self.MODEL_NAME  = ''
         
